@@ -6,16 +6,43 @@ import '../widgets/adaptive_flat_button.dart';
 class NewTransaction extends StatefulWidget {
   final Function addTx;
 
-  NewTransaction(this.addTx);
+  NewTransaction(this.addTx) {
+    print('ctor NewTransaction widget');
+  }
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('createState NewTransaction widget');
+    return new _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate;
+
+  _NewTransactionState() {
+    print('ctor NewTransactionState');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('_NewTransactionState -> initState');
+  }
+
+  @override
+  void didUpdateWidget(NewTransaction oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('_NewTransactionState -> didUpdateWidget');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('_NewTransactionState -> dispose');
+  }
 
   void _submitData() {
     if (_amountController.text.isEmpty) {
@@ -64,12 +91,12 @@ class _NewTransactionState extends State<NewTransaction> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 controller: _amountController,
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => _submitData(),
@@ -88,7 +115,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 ),
               ),
               RaisedButton(
-                child: Text('Add Transaction'),
+                child: const Text('Add Transaction'),
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).textTheme.button.color,
                 onPressed: _submitData,
